@@ -22,12 +22,14 @@ ctx.fillStyle = "#93b9d4";
     hLevel=h-data[0].height;
     wLevel= data[0].width;
 for( i = 2;i<=n; i++){
-    if ( w-wLevel >= data[i-2].width){
+    if ( w-wLevel >= data[i-2].width){// вот здесь проблема!!!!!!!!!!!!!!!!!!!!!!!
         ctx.fillRect(wLevel, h-data[i-1].height, data[i-1].width, data[i-1].height);
         ctx.strokeRect(wLevel, h-data[i-1].height, data[i-1].width, data[i-1].height);
         wLevel += data[i-1].width;
         console.log(wLevel);
         console.log(w-wLevel);
+
+        // 
     }
     else if (w-wLevel<data[i-2].width){
         ctx.fillRect(wLevel-wLevel, hLevel-data[i-1].height , data[i-1].width, data[i-1].height);
