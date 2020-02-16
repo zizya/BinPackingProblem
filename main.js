@@ -1,80 +1,5 @@
-// window.onload = function render() {
-//     let cube = document.createElement('div');
 
 
-//     let data = rect;
-//     let level = 0;
-//     let hLevel = 0;
-//     let wLevel = 0;
-//     let i = 1;
-//     let levelNum = 1;
-//     let n = amountOfBoxes.amount;
-//     let w = boxSize.boxWidth;
-//     let h = boxSize.boxHeight;
-//     cube.innerHTML = `<canvas id="layer0" height=${h} width=${w}>`;
-//     document.body.append(cube);
-//     let rectangles = document.getElementById('layer0');
-//     let ctx = rectangles.getContext('2d');
-// // console.log (w);
-// ctx.fillStyle = "#93b9d4";
-//     ctx.fillRect(0, h-data[0].height, data[0].width, data[0].height);
-//     ctx.strokeRect(0, h-data[0].height, data[0].width, data[0].height);
-//     hLevel=h-data[0].height;
-//     wLevel= data[0].width;
-// for( i = 2;i<=n; i++){
-//     if ( w-wLevel > data[i-2].width){
-//         ctx.fillRect(wLevel, h-data[i-1].height, data[i-1].width, data[i-1].height);
-//         ctx.strokeRect(wLevel, h-data[i-1].height, data[i-1].width, data[i-1].height);
-//         wLevel += data[i-1].width;
-//         console.log(wLevel);
-//         console.log(w-wLevel);
-
-//     }
-//     else if (w-wLevel<data[i-2].width){
-//         ctx.fillRect(wLevel-wLevel, hLevel-data[i-1].height , data[i-1].width, data[i-1].height);
-//         ctx.strokeRect(wLevel-wLevel, hLevel-data[i-1].height, data[i-1].width, data[i-1].height);
-//         //  level++;
-//         //  wLevel +=data[i-1].width;
-//         //   hLevel =data[i-1].height;
-//         //   console.log(data[i-1].height)
-//           hLevel = hLevel - data[i-1].height;
-
-//     }
-
-// }
-
-
-// }
-
-// let rectangle1 = {
-//     width: 350,
-//     height: 150
-// };
-
-// let rectangle2 = {
-//     width: 100,
-//     height: 351
-// };
-// let rectangle3 = {
-//     width: 250,
-//     height: 250
-// };
-// let rectangle4 = {
-//     width: 200,
-//     height: 200
-// };
-// let rectangle5 = {
-//     width: 250,
-//     height: 350
-// };
-let boxSize = {
-    boxWidth: 351,
-    boxHeight: 1000
-};
-let amountOfBoxes = { amount: 5 };
-
-// let rect = [rectangle1, rectangle2, rectangle3, rectangle4, rectangle5,];
-//  console.log(rect);
 
 
 function toJsonData() {
@@ -119,6 +44,7 @@ function toJsonData() {
         rectangle3 = {
             width: side3,
             height: side33
+
         },
         rectangle4 = {
             width: side4,
@@ -129,7 +55,9 @@ function toJsonData() {
             height: side55
         },
 
+
     ]
+
     arr = outputData;
     function sortByHeight(arr) {
         arr.sort((a, b) => a.height <= b.height ? 1 : -1);
@@ -143,227 +71,107 @@ function toJsonData() {
 }
 
 
-function read(json){
-    let input=JSON.parse(json);
-    function calc(input){
-    let data = input;
-    
-    let hLevel = 0;
-    let wLevel = 0;
-    let i = 1;
-    
-    let n = amountOfBoxes.amount;
-    let w = boxSize.boxWidth;
-    let h = boxSize.boxHeight;
-    // console.log(data);
-    let a = [
-        position={x:2, y: h-data[0].height},
-        size={width: data[0].width, height:data[0].height}
-    ];
-    // adding(a);
-    // console.log(a);
-    hLevel = h - data[0].height;
-    wLevel = data[0].width;
-    let numbers= [];
-    let f
-    let j
-    for (i = 2; i <= n; i++) {
-        
-        if (w - wLevel > +data[i - 2].width) {
-            let b = [
-                position={x:wLevel, y: h - data[i - 1].height},
-                size={width: data[i - 1].width, height:data[i - 1].height}
-            ];
+function read(json) {
+    let input = JSON.parse(json);
+    function calc(input) {
+        let cube6 = document.getElementById("m6");
+        let side6 = cube6.value;
+        let cube66 = document.getElementById("m66");
+        let side66 = cube66.value;
 
-           
-             f= a.concat(b);
-            
-            //  console.log(f);
-            wLevel += data[i - 1].width;
-            
-            
+
+
+        let boxSize = {
+            boxWidth: side6,
+            boxHeight: side66
+        };
+        let amountOfBoxes = {
+            amount: 5
         }
-        else if (w - wLevel < +data[i - 2].width) {
-            let c = [
-                position={x:wLevel - wLevel, y: hLevel - data[i - 1].height},
-                size={width: data[i - 1].width, height:data[i - 1].height}
-            ];
-            // function otday(f){
-             j = f.concat(c);
-            ;
-            // adding(c);
-            hLevel = hLevel - data[i - 1].height;
+        let data = input;
 
-            
+        let hLevel = 0;
+        let wLevel = 0;
+        let i = 1;
+
+        let n = amountOfBoxes.amount;
+        let w = boxSize.boxWidth;
+        let h = boxSize.boxHeight;
+
+        let testObject = [];
+        testObject[0] = {
+            'position': { x: 0, y: +h - data[0].height },
+            'size': { width: +data[0].width, height: +data[0].height }
+        };
+
+        hLevel = +h - data[0].height;
+        wLevel = +data[0].width;
 
 
+        for (i = 2; i <= n; i++) {
+
+            if (w - wLevel >= +data[i - 1].width) {
+                testObject[i - 1] = {
+                    'position': { x: +wLevel, y: +h - data[i - 1].height },
+                    'size': { width: +data[i - 1].width, height: +data[i - 1].height }
+                };
+
+                wLevel += +data[i - 1].width;
+            }
+            else if (w - wLevel <= +data[i - 1].width) {
+                testObject[i - 1] = {
+                    'position': { x: +wLevel - wLevel, y: +hLevel - data[i - 1].height },
+                    'size': { width: +data[i - 1].width, height: +data[i - 1].height }
+                };
+                hLevel = hLevel - +data[i - 1].height;
+            }
 
         }
 
-    }    console.log(j)
+
+        let stroke = JSON.stringify(testObject);
+
+        function read2(stroke) {
+            let inputData = JSON.parse(stroke);
+
+
+
+            let cube = document.createElement('div');
+            cube.innerHTML = `<canvas id="layer0" height=${h} width=${w}>`;
+            document.body.append(cube);
+            let rectangles = document.getElementById('layer0');
+            let ctx = rectangles.getContext('2d');
+
+            ctx.fillStyle = "#93b9d4";
+
+            ctx.fillRect(inputData[0].position.x, inputData[0].position.y, inputData[0].size.width, inputData[0].size.height);
+            ctx.strokeRect(inputData[0].position.x, inputData[0].position.y, inputData[0].size.width, inputData[0].size.height);
+
+            ctx.fillRect(inputData[1].position.x, inputData[1].position.y, inputData[1].size.width, inputData[1].size.height);
+            ctx.strokeRect(inputData[1].position.x, inputData[1].position.y, inputData[1].size.width, inputData[1].size.height);
+
+            ctx.fillRect(inputData[2].position.x, inputData[2].position.y, inputData[2].size.width, inputData[2].size.height);
+            ctx.strokeRect(inputData[2].position.x, inputData[2].position.y, inputData[2].size.width, inputData[2].size.height);
+
+            ctx.fillRect(inputData[3].position.x, inputData[3].position.y, inputData[3].size.width, inputData[3].size.height);
+            ctx.strokeRect(inputData[3].position.x, inputData[3].position.y, inputData[3].size.width, inputData[3].size.height);
+
+            ctx.fillRect(inputData[4].position.x, inputData[4].position.y, inputData[4].size.width, inputData[4].size.height);
+            ctx.strokeRect(inputData[4].position.x, inputData[4].position.y, inputData[4].size.width, inputData[4].size.height);
+
+
+
+
+            button1.onclick = function () {
+                cube.remove();
+            }
+        }
+        read2(stroke);
+    }
+
+    calc(input);
 }
 
 
-calc(input);
-}
-// function adding(a,b,c){
-//     let g= a.concat(b,c);
-//     console.log(g);
-//     let oMy = JSON.stringify(a,b,c)
-    
-//     read2(oMy);
-// }
 
 
-function read2(oMy) {
-    let input2 = JSON.parse(oMy);
-    
-}
-
-
-    //     function render(input2) {
-
-    //         let cube = document.createElement('div');
-
-
-    //         let data2 = input2;
-    //         console.log(data2);
-    //         let level = 0;
-    //         let hLevel = 0;
-    //         let wLevel = 0;
-    //         let i = 1;
-    //         let levelNum = 1;
-    //         let n = amountOfBoxes.amount;
-    //         let w = boxSize.boxWidth;
-    //         let h = boxSize.boxHeight;
-    //         cube.innerHTML = `<canvas id="layer0" height=${h} width=${w}>`;
-    //         document.body.append(cube);
-    //         let rectangles = document.getElementById('layer0');
-    //         let ctx = rectangles.getContext('2d');
-
-    //         ctx.fillStyle = "#93b9d4";
-    //         ctx.fillRect(0, h - data2[0].height, data2[0].width, data2[0].height);
-    //         ctx.strokeRect(0, h - data2[0].height, data2[0].width, data2[0].height);
-            
-    //         hLevel = h - data2[0].height;
-    //         wLevel = data2[0].width;
-    //         for (i = 2; i <= n; i++) {
-    //             if (w - wLevel > +data2[i - 2].width) {
-    //                 ctx.fillRect(wLevel, h - data2[i - 1].height, data2[i - 1].width, data2[i - 1].height);
-    //                 ctx.strokeRect(wLevel, h - data2[i - 1].height, data2[i - 1].width, data2[i - 1].height);
-
-                
-
-
-
-    //                 // let a = ctx.fillRect;
-
-    //                 // console.log(w-wLevel);
-    //                 //     let r = [];
-    //                 //    r += r.push(wLevel, h-data[i-1].height, data[i-1].width, data[i-1].height);
-    //                 // console.log(r);
-    //                 wLevel += data2[i - 1].width;
-    //             }
-    //             else if (w - wLevel < +data2[i - 2].width) {
-    //                 ctx.fillRect(wLevel - wLevel, hLevel - data2[i - 1].height, data2[i - 1].width, data2[i - 1].height);
-    //                 ctx.strokeRect(wLevel - wLevel, hLevel - data2[i - 1].height, data2[i - 1].width, data2[i - 1].height);
-    //                 //  level++;
-    //                 //  wLevel +=data[i-1].width;
-    //                 //   hLevel =data[i-1].height;
-    //                 //   console.log(data[i-1].height)
-                  
-                    
-
-
-    //                 hLevel = hLevel - data[i - 1].height;
-
-    //             }
-
-    //         }
-
-    //         button1.onclick = function () {
-    //             cube.remove();
-    //         }
-    //     }
-
-    //     render(input2);
-    // }
-// function read(json) {
-//     let input = JSON.parse(json);
-
-
-
-//         function render(input) {
-
-//             let cube = document.createElement('div');
-
-
-//             let data = input;
-//             let level = 0;
-//             let hLevel = 0;
-//             let wLevel = 0;
-//             let i = 1;
-//             let levelNum = 1;
-//             let n = amountOfBoxes.amount;
-//             let w = boxSize.boxWidth;
-//             let h = boxSize.boxHeight;
-//             cube.innerHTML = `<canvas id="layer0" height=${h} width=${w}>`;
-//             document.body.append(cube);
-//             let rectangles = document.getElementById('layer0');
-//             let ctx = rectangles.getContext('2d');
-
-//             ctx.fillStyle = "#93b9d4";
-//             ctx.fillRect(0, h - data[0].height, data[0].width, data[0].height);
-//             ctx.strokeRect(0, h - data[0].height, data[0].width, data[0].height);
-//             let a = [{
-//                 position: { x: 0, y: h - data[0].height },
-//                 size: { width: data[0].width, height: data[0].height }
-//             }];
-//             console.log(a);
-//             hLevel = h - data[0].height;
-//             wLevel = data[0].width;
-//             for (i = 2; i <= n; i++) {
-//                 if (w - wLevel > +data[i - 2].width) {
-//                     ctx.fillRect(wLevel, h - data[i - 1].height, data[i - 1].width, data[i - 1].height);
-//                     ctx.strokeRect(wLevel, h - data[i - 1].height, data[i - 1].width, data[i - 1].height);
-
-//                     let b = [];
-//                     b.push([wLevel, h - data[i - 1].height, data[i - 1].width, data[i - 1].height]);
-
-//                     console.log(b);
-
-
-
-//                     // let a = ctx.fillRect;
-
-//                     // console.log(w-wLevel);
-//                     //     let r = [];
-//                     //    r += r.push(wLevel, h-data[i-1].height, data[i-1].width, data[i-1].height);
-//                     // console.log(r);
-//                     wLevel += data[i - 1].width;
-//                 }
-//                 else if (w - wLevel < +data[i - 2].width) {
-//                     ctx.fillRect(wLevel - wLevel, hLevel - data[i - 1].height, data[i - 1].width, data[i - 1].height);
-//                     ctx.strokeRect(wLevel - wLevel, hLevel - data[i - 1].height, data[i - 1].width, data[i - 1].height);
-//                     //  level++;
-//                     //  wLevel +=data[i-1].width;
-//                     //   hLevel =data[i-1].height;
-//                     //   console.log(data[i-1].height)
-//                     let c = [];
-//                     c.push([wLevel - wLevel, hLevel - data[i - 1].height, data[i - 1].width, data[i - 1].height]);
-//                     console.log(c);
-
-
-//                     hLevel = hLevel - data[i - 1].height;
-
-//                 }
-
-//             }
-
-//             button1.onclick = function () {
-//                 cube.remove();
-//             }
-//         }
-
-//         render(input);
-    // }
